@@ -1,0 +1,11 @@
+root = true
+
+[*]
+charset = utf-8
+line_ending = lf
+indent_style = space
+indent_size = 2
+
+[Makefile]
+indent_style = tab
+tab_width = 4
