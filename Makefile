@@ -1,3 +1,9 @@
+up:
+	docker-compose up
+
+down:
+	docker-compose down
+
 migrate:
 	docker-compose exec php bin/console doctrine:migrations:migrate
 
@@ -9,6 +15,9 @@ clear-cache:
 
 cs:
 	vendor/bin/php-cs-fixer fix --verbose
+
+dump:
+	docker-compose exec php bin/console server:dump
 
 test:
 	bin/phpunit

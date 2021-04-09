@@ -1,47 +1,47 @@
 version: "3"
 
 services:
-  nginx:
-    build:
-      context: .
-      dockerfile: docker/nginx/Dockerfile
-    volumes:
-      - .:/var/www/symfony/
-    ports:
-      - 8080:80
-    depends_on:
-      - php
-    networks:
-      - symfony
+    nginx:
+        build:
+            context: .
+            dockerfile: docker/nginx/Dockerfile
+        volumes:
+            - .:/var/www/symfony/:cached
+        ports:
+            - 8080:80
+        depends_on:
+            - php
+        networks:
+            - symfony
 
-  php:
-    build:
-      context: .
-      dockerfile: docker/php/Dockerfile
-    environment:
-      APP_ENV: dev
-    volumes:
-      - .:/var/www/symfony/
-    depends_on:
-      - db
-    networks:
-      - symfony
+    php:
+        build:
+            context: .
+            dockerfile: docker/php/Dockerfile
+        environment:
+            APP_ENV: dev
+        volumes:
+            - .:/var/www/symfony/:cached
+        depends_on:
+            - db
+        networks:
+            - symfony
 
-  db:
-    image: postgres:13-alpine
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: postgres
-    ports:
-      - 5432:5432
-    networks:
-      - symfony
-    volumes:
-      - ./docker/db/data:/var/lib/postgresql/data
+    db:
+        image: postgres:13-alpine
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_DB: postgres
+        ports:
+            - 5432:5432
+        networks:
+            - symfony
+        volumes:
+            - ./docker/db/data:/var/lib/postgresql/data
 
 volumes:
-  data:
+    data:
 
 networks:
-  symfony:
+    symfony:

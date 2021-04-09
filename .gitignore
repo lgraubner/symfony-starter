@@ -9,6 +9,9 @@
 /vendor/
 ###< symfony/framework-bundle ###
 
+docker/db/*
+!docker/db/.gitkeep
+
 ###> friendsofphp/php-cs-fixer ###
 /.php_cs
 /.php_cs.cache
@@ -19,6 +22,3 @@
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
-
-docker/db/*
-!docker/db/.gitkeep

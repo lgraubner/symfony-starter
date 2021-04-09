@@ -1,0 +1,11 @@
+**/.DS_Store
+.git/
+.gitignore
+.editorconfig
+.php_cs.cache
+bin/*
+!bin/console
+
+docker/
+var/
+vendor/
