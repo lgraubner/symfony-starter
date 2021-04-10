@@ -6,6 +6,6 @@
 bin/*
 !bin/console
 
-docker/
+docker/db/data
 var/
 vendor/

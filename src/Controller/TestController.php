@@ -9,12 +9,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class TestController extends AbstractController
 {
     /**
-     * @Route("/barzaasda", name="foo")
+     * @Route("/barz", name="foo")
      */
     public function show(): Response
     {
-        dump('foo bar');
+        dump('foo baraa');
 
-        return $this->json(['hello' => 'world']);
+        return $this->json(['asfasasfas' => 'c']);
     }
 }
