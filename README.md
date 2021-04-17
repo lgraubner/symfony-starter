@@ -52,4 +52,19 @@ composer require symfony/serializer
 
 # debug
 composer require debug
+
+# security
+composer require security
+
+# make command
+composer require symfony/maker-bundle --dev
+
+# mail
+composer require symfony/mailer
+
+# form handling
+composer require symfony/form
+
+# reset password
+composer require symfonycasts/reset-password-bundle
 ```

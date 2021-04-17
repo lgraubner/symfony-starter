@@ -3,29 +3,24 @@ version: "3"
 services:
     nginx:
         build:
-            context: .
-            dockerfile: docker/nginx/Dockerfile
+            context: docker/nginx
         volumes:
-            - .:/var/www/symfony/:cached
+            - ./public:/var/www/symfony/public/:cached
         ports:
             - 8080:80
         depends_on:
             - php
-        networks:
-            - symfony
 
     php:
         build:
-            context: .
-            dockerfile: docker/php/Dockerfile
+            context: docker/php
         environment:
             APP_ENV: dev
         volumes:
             - .:/var/www/symfony/:cached
+            - /var/www/symfony/vendor
         depends_on:
             - db
-        networks:
-            - symfony
 
     db:
         image: postgres:13-alpine
@@ -35,13 +30,10 @@ services:
             POSTGRES_DB: postgres
         ports:
             - 5432:5432
-        networks:
-            - symfony
         volumes:
-            - ./docker/db/data:/var/lib/postgresql/data
+            - ./docker/db/data/postgres:/var/lib/postgresql/data
 
-volumes:
-    data:
-
-networks:
-    symfony:
+    adminer:
+        image: adminer:latest
+        ports:
+            - 8081:8080
