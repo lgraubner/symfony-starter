@@ -1,8 +1,4 @@
-# Symfony Starter
-
-## TODO
-
-cached controller problem
+# Symfony API Starter
 
 ## Common commands
 

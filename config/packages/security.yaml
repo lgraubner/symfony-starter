@@ -16,10 +16,13 @@ security:
             security: false
         main:
             anonymous: true
-            lazy: true
+            lazy: false
             provider: app_user_provider
             json_login:
-                check_path: auth_login
+                check_path: app_login
+                username_path: email
+            logout:
+                path: app_logout
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication

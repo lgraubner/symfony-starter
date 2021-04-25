@@ -4,7 +4,9 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -12,6 +14,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface
 {
+    use TimestampableEntity;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -20,6 +24,7 @@ class User implements UserInterface
     private $id;
 
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
@@ -31,9 +36,25 @@ class User implements UserInterface
 
     /**
      * @var string The hashed password
+     * @Assert\NotBlank
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $displayName;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $emailVerifiedAt;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $photoUrl;
 
     public function getId(): ?int
     {
@@ -63,7 +84,7 @@ class User implements UserInterface
     }
 
     /**
-     * @see UserInterface
+     * @see UserIntesrface
      */
     public function getRoles(): array
     {
@@ -114,5 +135,41 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getDisplayName(): ?string
+    {
+        return $this->displayName;
+    }
+
+    public function setDisplayName(?string $displayName): self
+    {
+        $this->displayName = $displayName;
+
+        return $this;
+    }
+
+    public function getEmailVerifiedAt(): ?\DateTimeInterface
+    {
+        return $this->emailVerifiedAt;
+    }
+
+    public function setEmailVerifiedAt(?\DateTimeInterface $emailVerifiedAt): self
+    {
+        $this->emailVerifiedAt = $emailVerifiedAt;
+
+        return $this;
+    }
+
+    public function getPhotoUrl(): ?string
+    {
+        return $this->photoUrl;
+    }
+
+    public function setPhotoUrl(?string $photoUrl): self
+    {
+        $this->photoUrl = $photoUrl;
+
+        return $this;
     }
 }
