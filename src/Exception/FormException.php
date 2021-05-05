@@ -24,6 +24,13 @@ class FormException extends HttpException
 
     public function getErrors()
     {
-        return $this->form->getErrors(true);
+        $data = [];
+        $errors = $this->form->getErrors(true);
+
+        foreach ($errors as $error) {
+            $data[$error->getOrigin()->getName()][] = $error->getMessage();
+        }
+
+        return $data;
     }
 }

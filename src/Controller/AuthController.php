@@ -5,11 +5,9 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Exception\FormException;
 use App\Form\RegisterFormType;
-use App\Http\ApiResponse;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AuthController extends AbstractRestController
@@ -44,9 +42,13 @@ class AuthController extends AbstractRestController
         $user->setDisplayName('Mickey Mouse');
 
         $form = $this->createForm(RegisterFormType::class);
+        $data = $request->request->all();
 
-        $form->submit($request);
+        $form->submit($data);
+
         if ($form->isSubmitted() && $form->isValid()) {
+            $user->setEmail($data['email']);
+
             return $this->handle($user);
         }
 

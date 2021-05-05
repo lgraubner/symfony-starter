@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 class RegisterFormType extends AbstractType
@@ -17,16 +18,15 @@ class RegisterFormType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
-                'required' => true,
                 'constraints' => [
-                    Email::class,
-                    NotBlank::class,
+                    new Email(),
+                    new NotBlank(),
                 ],
             ])
             ->add('password', TextType::class, [
-                'required' => true,
                 'constraints' => [
-                    NotBlank::class,
+                    new NotBlank(),
+                    new Length(['min' => 8]),
                 ],
             ])
         ;
