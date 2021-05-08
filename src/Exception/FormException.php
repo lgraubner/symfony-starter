@@ -3,16 +3,15 @@
 namespace App\Exception;
 
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
-class FormException extends HttpException
+class FormException extends BadRequestHttpException
 {
     protected $form;
 
-    public function __construct(FormInterface $form, int $statusCode = 400, string $message = null, \Exception $previous = null, array $headers = [], ?int $code = 0)
+    public function __construct(FormInterface $form, string $message = null, \Throwable $previous = null, ?int $code = 0, array $headers = [])
     {
-        parent::__construct($statusCode, $message ?: Response::$statusTexts[400], $previous, $headers, $code);
+        parent::__construct($message, $previous, $code, $headers);
 
         $this->form = $form;
     }

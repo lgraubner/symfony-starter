@@ -44,7 +44,7 @@ composer require --dev symfony/phpunit-bridge
 composer require symfony/validator
 
 # serializer
-composer require symfony/serializer
+composer require symfony/serializer-pack
 
 # debug
 composer require debug

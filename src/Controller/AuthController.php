@@ -53,6 +53,8 @@ class AuthController extends AbstractRestController
         }
 
         throw new FormException($form);
+
+        // throw new FormException($form);
     }
 
     private function getErrorMessages(FormInterface $form)
@@ -77,8 +79,8 @@ class AuthController extends AbstractRestController
     /**
      * @Route("/auth/verify", name="app_verify", methods={"POST"})
      */
-    public function verify(): Response
+    public function verify()
     {
-        return $this->createNotFoundException();
+        $this->createNotFoundException();
     }
 }
